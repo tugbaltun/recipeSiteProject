@@ -1,0 +1,57 @@
+﻿
+@model website.Models.recipes
+@{
+    var url = Request.Url.AbsolutePath;
+}
+@if (!User.Identity.IsAuthenticated)
+{
+    <text>Lütfen <a href="/Home/Login?ReturnUrl=@Request.Url.AbsolutePath" title="Oy verebilmek için giriş yapın!">Giriş Yap</a></text>
+    return;
+}
+    <div id="ratingDiv" class="smallText">
+        <img src="~/Content/img/rating_off.png" alt="" class="ratingStar" data-value="1" />
+        <img src="~/Content/img/rating_off.png" alt="" class="ratingStar" data-value="2" />
+        <img src="~/Content/img/rating_off.png" alt="" class="ratingStar" data-value="3" />
+        <img src="~/Content/img/rating_off.png" alt="" class="ratingStar" data-value="4" />
+        <img src="~/Content/img/rating_off.png" alt="" class="ratingStar" data-value="5" />
+        <br />
+        <label id="lblResult"></label>
+    </div>
+    <style type="text/css">
+        .ratingStar {
+            cursor: pointer;
+        }
+    </style>
+    <script type="text/javascript">
+        var clickedFlag = false;
+        $(".ratingStar").mouseover(function () {
+            $(this).attr("src", "/Content/img/rating_on.png").prevAll("img.ratingStar").attr("src", "/Content/img/rating_on.png");
+        });
+        $(".ratingStar, #radingDiv").mouseout(function () {
+            $(this).attr("src", "/Content/img/rating_off.png");
+        });
+        $("#ratingDiv").mouseout(function () {
+            if (!clickedFlag)
+            {
+                $(".ratingStar").attr("src", "/Content/img/rating_off.png");
+            }
+        });
+        $(".ratingStar").click(function () {
+            clickedFlag = true;
+            $(".ratingStar").unbind("mouseout mouseover click").css("cursor", "default");
+
+            var url = "/Home/SendRating?r=" + $(this).attr("data-value") + "&s=5&id=@Model.id&url=@url";
+            $.post(url, null, function (data) {
+                $("#lblResult").html(data);
+            });
+        });
+        $("#lblResult").ajaxStart(function () {
+            $("#lblResult").html("Processing ....");
+        });
+        $("#lblResult").ajaxError(function () {
+            $("#lblResult").html("<br />Error occured.");
+        });
+    </script>
+
+
+

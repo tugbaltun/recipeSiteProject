@@ -1,0 +1,179 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Yemek Tarifleri</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">*@
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.8.1/css/bootstrap-select.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.8.1/js/bootstrap-select.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+
+
+
+
+</head>
+
+<body id="page-top" style="background-color:#e4e4e4;">
+    <div class="container" style="margin-top:0px;">
+        <!-- Page Wrapper -->
+        <div id="wrapper">
+            <!-- Sidebar -->
+            <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+                <!-- Sidebar - Brand -->
+                <a class="navbar-brand" href="#">
+                    <font style="vertical-align: inherit;">
+                        <font style="vertical-align: inherit;">
+                            <img src="~/Content/img/logo.png" style="width:220px;height:70px;" />
+                        </font>
+                    </font>
+                </a>
+                <!-- Divider -->
+                <hr class="sidebar-divider my-0">
+
+                <!-- Divider -->
+                <hr class="sidebar-divider">
+
+                <!-- Heading -->
+                
+                @Html.Action("Kategoriler","Home")
+            </ul>
+            <!-- End of Sidebar -->
+            <!-- Content Wrapper -->
+            <div id="content-wrapper" class="d-flex flex-column">
+                @*<div class="form-group">
+                    <ul class="navbar-nav">
+
+                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/Home/Index">Ana sayfa</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Recipes/Index">Tarifler</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Home/Login">Üye Girişi</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Home/Register">Üye Ol</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/Home/Index"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ana sayfa </font></font><span class="sr-only"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">(şimdiki)</font></font></span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Recipes/Index"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tarifler</font></font></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/recipes/Create">Tarif Ekle </a>
+                            </li>
+                            <li class="nav-item dropdown no-arrow">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="mr-2 d-none d-lg-inline text-gray-600">@Session["user"]</span>
+                                    <img class="img-profile rounded-circle" src="~/Content/img/users/@Session["img"]">
+                                </a>
+                                <!-- Dropdown - User Information -->
+                                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" style="margin-top:-55px;" aria-labelledby="userDropdown">
+                                    <a class="dropdown-item" href="~/users/Details?id=@Session["uye_id"]">
+                                        Profili Görüntüle
+                                    </a>
+                                    <a class="dropdown-item" href="~/users/Edit?id=@Session["uye_id"]">
+                                        Profil Ayarları
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                        Çıkış Yap
+                                    </a>
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                </div>*@
+                <!-- Main Content -->
+                <div id="content">
+
+                    <!-- Topbar -->
+                    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                        <!-- Sidebar Toggle (Topbar) -->
+                        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3"></button>
+
+                        <!-- Topbar Search -->
+                        @Html.Partial("AraPartial")
+
+                        <!-- Topbar Navbar -->
+
+
+                    </nav>
+                    <!-- End of Topbar -->
+                    <!-- Begin Page Content -->
+                    <div class="container-fluid">
+                        @RenderBody()
+                    </div>
+                    <!-- /.container-fluid -->
+
+                </div>
+                <!-- End of Main Content -->
+                <!-- Footer -->
+                <footer class="sticky-footer bg-white">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span>Copyright &copy; 2019</span>
+                        </div>
+                    </div>
+                </footer>
+                <!-- End of Footer -->
+
+            </div>
+            <!-- End of Content Wrapper -->
+
+        </div>
+        <!-- End of Page Wrapper -->
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+
+        <!-- Logout Modal-->
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Çıkmak İstediğinizden Emin Misiniz?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Eğer çıkmak istediğinizden eminseniz "Çıkış Yap" butonuna tıklayarak oturumunuzu sonlandırabilirsiniz</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">İptal Et</button>
+                        <a class="btn btn-primary" href="/Home/Logout">Çıkış Yap</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+</body>
+
+</html>
+

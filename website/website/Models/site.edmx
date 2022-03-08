@@ -1,0 +1,384 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="websiteModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="categories">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="comments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="date" Type="datetime" />
+          <Property Name="confirmation" Type="bit" />
+          <Property Name="content" Type="varchar" MaxLength="50" />
+          <Property Name="meal_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="points">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="point" Type="int" />
+          <Property Name="ipAdd" Type="varchar" MaxLength="50" />
+          <Property Name="mealid" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="recipes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="material" Type="varchar(max)" />
+          <Property Name="praparation" Type="varchar(max)" />
+          <Property Name="image" Type="varchar" MaxLength="200" />
+          <Property Name="date" Type="datetime" />
+          <Property Name="categori_id" Type="int" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_sname" Type="varchar" MaxLength="50" />
+          <Property Name="mail" Type="varchar" MaxLength="50" />
+          <Property Name="password" Type="varchar" MaxLength="50" />
+          <Property Name="gender" Type="bit" />
+          <Property Name="image" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <Association Name="FK_comments_recipes1">
+          <End Role="recipes" Type="Self.recipes" Multiplicity="1" />
+          <End Role="comments" Type="Self.comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="recipes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="comments">
+              <PropertyRef Name="meal_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_comments_users">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="comments" Type="Self.comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="comments">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_points_recipes">
+          <End Role="recipes" Type="Self.recipes" Multiplicity="1" />
+          <End Role="points" Type="Self.points" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="recipes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="points">
+              <PropertyRef Name="mealid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_recipes_categories">
+          <End Role="categories" Type="Self.categories" Multiplicity="1" />
+          <End Role="recipes" Type="Self.recipes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categories">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="recipes">
+              <PropertyRef Name="categori_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_recipes_users">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="recipes" Type="Self.recipes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="recipes">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="websiteModelStoreContainer">
+          <EntitySet Name="categories" EntityType="Self.categories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="comments" EntityType="Self.comments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="points" EntityType="Self.points" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="recipes" EntityType="Self.recipes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_comments_recipes1" Association="Self.FK_comments_recipes1">
+            <End Role="recipes" EntitySet="recipes" />
+            <End Role="comments" EntitySet="comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_comments_users" Association="Self.FK_comments_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="comments" EntitySet="comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_points_recipes" Association="Self.FK_points_recipes">
+            <End Role="recipes" EntitySet="recipes" />
+            <End Role="points" EntitySet="points" />
+          </AssociationSet>
+          <AssociationSet Name="FK_recipes_categories" Association="Self.FK_recipes_categories">
+            <End Role="categories" EntitySet="categories" />
+            <End Role="recipes" EntitySet="recipes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_recipes_users" Association="Self.FK_recipes_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="recipes" EntitySet="recipes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="websiteModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="categories">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="recipes" Relationship="Self.FK_recipes_categories" FromRole="categories" ToRole="recipes" />
+        </EntityType>
+        <EntityType Name="comments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+          <Property Name="confirmation" Type="Boolean" />
+          <Property Name="content" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="meal_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="recipes" Relationship="Self.FK_comments_recipes1" FromRole="comments" ToRole="recipes" />
+          <NavigationProperty Name="users" Relationship="Self.FK_comments_users" FromRole="comments" ToRole="users" />
+        </EntityType>
+        <EntityType Name="points">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="point" Type="Int32" />
+          <Property Name="ipAdd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="mealid" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="recipes" Relationship="Self.FK_points_recipes" FromRole="points" ToRole="recipes" />
+        </EntityType>
+        <EntityType Name="recipes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="material" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="praparation" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="image" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+          <Property Name="categori_id" Type="Int32" Nullable="false" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="categories" Relationship="Self.FK_recipes_categories" FromRole="recipes" ToRole="categories" />
+          <NavigationProperty Name="comments" Relationship="Self.FK_comments_recipes1" FromRole="recipes" ToRole="comments" />
+          <NavigationProperty Name="points" Relationship="Self.FK_points_recipes" FromRole="recipes" ToRole="points" />
+          <NavigationProperty Name="users" Relationship="Self.FK_recipes_users" FromRole="recipes" ToRole="users" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_sname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="gender" Type="Boolean" />
+          <Property Name="image" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="comments" Relationship="Self.FK_comments_users" FromRole="users" ToRole="comments" />
+          <NavigationProperty Name="recipes" Relationship="Self.FK_recipes_users" FromRole="users" ToRole="recipes" />
+        </EntityType>
+        <Association Name="FK_recipes_categories">
+          <End Role="categories" Type="Self.categories" Multiplicity="1" />
+          <End Role="recipes" Type="Self.recipes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categories">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="recipes">
+              <PropertyRef Name="categori_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_comments_recipes1">
+          <End Role="recipes" Type="Self.recipes" Multiplicity="1" />
+          <End Role="comments" Type="Self.comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="recipes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="comments">
+              <PropertyRef Name="meal_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_comments_users">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="comments" Type="Self.comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="comments">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_points_recipes">
+          <End Role="recipes" Type="Self.recipes" Multiplicity="1" />
+          <End Role="points" Type="Self.points" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="recipes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="points">
+              <PropertyRef Name="mealid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_recipes_users">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="recipes" Type="Self.recipes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="recipes">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="websiteEntities3" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="categories" EntityType="Self.categories" />
+          <EntitySet Name="comments" EntityType="Self.comments" />
+          <EntitySet Name="points" EntityType="Self.points" />
+          <EntitySet Name="recipes" EntityType="Self.recipes" />
+          <EntitySet Name="users" EntityType="Self.users" />
+          <AssociationSet Name="FK_recipes_categories" Association="Self.FK_recipes_categories">
+            <End Role="categories" EntitySet="categories" />
+            <End Role="recipes" EntitySet="recipes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_comments_recipes1" Association="Self.FK_comments_recipes1">
+            <End Role="recipes" EntitySet="recipes" />
+            <End Role="comments" EntitySet="comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_comments_users" Association="Self.FK_comments_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="comments" EntitySet="comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_points_recipes" Association="Self.FK_points_recipes">
+            <End Role="recipes" EntitySet="recipes" />
+            <End Role="points" EntitySet="points" />
+          </AssociationSet>
+          <AssociationSet Name="FK_recipes_users" Association="Self.FK_recipes_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="recipes" EntitySet="recipes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="websiteModelStoreContainer" CdmEntityContainer="websiteEntities3">
+          <EntitySetMapping Name="categories">
+            <EntityTypeMapping TypeName="websiteModel.categories">
+              <MappingFragment StoreEntitySet="categories">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="comments">
+            <EntityTypeMapping TypeName="websiteModel.comments">
+              <MappingFragment StoreEntitySet="comments">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="confirmation" ColumnName="confirmation" />
+                <ScalarProperty Name="content" ColumnName="content" />
+                <ScalarProperty Name="meal_id" ColumnName="meal_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="points">
+            <EntityTypeMapping TypeName="websiteModel.points">
+              <MappingFragment StoreEntitySet="points">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="point" ColumnName="point" />
+                <ScalarProperty Name="ipAdd" ColumnName="ipAdd" />
+                <ScalarProperty Name="mealid" ColumnName="mealid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="recipes">
+            <EntityTypeMapping TypeName="websiteModel.recipes">
+              <MappingFragment StoreEntitySet="recipes">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="material" ColumnName="material" />
+                <ScalarProperty Name="praparation" ColumnName="praparation" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="categori_id" ColumnName="categori_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="websiteModel.users">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name_sname" ColumnName="name_sname" />
+                <ScalarProperty Name="mail" ColumnName="mail" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="image" ColumnName="image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

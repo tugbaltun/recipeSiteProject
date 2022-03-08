@@ -1,0 +1,13 @@
+﻿<h4> Yemek Tarifleri Sitemize Hoşgeldiniz</h4>
+@*@model website.Models.recipes
+@{
+    /**/
+
+    ViewBag.Title = "Home Page";
+}
+
+@{var Employees = new List<SelectListItem>();
+    Employees = ViewBag.Employees;}
+Country:
+@Html.DropDownListFor(m => m.id, new SelectList(Model.malzemelist, "name", "name"), new { @placeholder = "Please select country", @class = "ddlMultiSlectBox" })*@
+

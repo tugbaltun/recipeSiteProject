@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>SB Admin - Blank Page</title>
+    <!-- Bootstrap core CSS-->
+    @Styles.Render("~/Content")
+    @Scripts.Render("~/bundles/jquery")
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom fonts for this template -->
+    <link href="~/Content/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <!-- Plugin CSS -->
+    <link href="~/Content/magnific-popup.css" rel="stylesheet" type="text/css">
+    <!-- Custom styles for this template -->
+    <link href="~/Content/freelancer.min.css" rel="stylesheet">
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+
+</head>
+<body id="page-top">
+    <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+        <button class="btn btn-link btn-sm text-white order-sm-10" id="sidebarToggle" href="#">
+            <span id="menuIcon" class="glyphicon glyphicon-align-justify"></span>
+        </button>
+        <a id="logo" class="navbar-brand mr-1" href="index.html"><img id="logoimg" src="~/Content/imgs/logo.jpg" /></a>
+
+        <!-- Navbar Search -->
+        <!-- Navbar -->
+        <div id="userLink">
+            <ul class="navbar-nav ml-auto ml-md-0">
+                <li class="nav-item dropdown no-arrow">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span id="userIcon" class="glyphicon glyphicon-user"></span>
+                        <span id="hidingIcon">@Session["lawyer"]  <span class="glyphicon glyphicon-chevron-down"></span></span>
+                    </a>
+
+                    <div class="dropdown-menu" id="userDown" aria-labelledby="userDropdown">
+                        <span id="ddIcon" class="glyphicon glyphicon-eject"></span>
+                        <a style="margin-top:-22px;" class="dropdown-item" href="#">Ayarlar</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/lawyers/Logout" data-toggle="modal" data-target="#logoutModal">Çıkış Yap</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <ul class="sidebar navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="/Home/Index">
+                    <span class="glyphicon glyphicon-home"></span>
+                    <span>Ana Sayfa</span>
+                </a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link " href="/FoyKarti/Index" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="glyphicon glyphicon-align-center"></span>
+                    <span>Föy Kartları</span>
+                    <span id="dropdownIcon" class="glyphicon glyphicon glyphicon-chevron-down" style="float:right;"></span>
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+                    <a class="dropdown-item" href="/FoyKarti/Index">Listele</a>
+                    <a class="dropdown-item" href="/FoyKarti/Create">Kayıt Ekle</a>
+                </div>
+
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="glyphicon glyphicon-align-center"></span>
+                    <span>Avukatlar</span>
+                    <span id="dropdownIcon" class="glyphicon glyphicon glyphicon-chevron-down" style="float:right;"></span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+                    <a class="dropdown-item" href="/lawyers/Index">Listele</a>
+                    <a class="dropdown-item" href="/lawyers/Create">Kayıt Ekle</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="glyphicon glyphicon-align-center"></span>
+                    <span>Müşteriler</span>
+                    <span id="dropdownIcon" class="glyphicon glyphicon glyphicon-chevron-down" style="float:right;"></span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+                    <a class="dropdown-item" href="/customers/Index">Listele</a>
+                    <a class="dropdown-item" href="/customers/Create">Kayıt Ekle</a>
+                </div>
+            </li>
+        </ul>
+        <div id="content-wrapper">
+            <div class="container-fluid">
+                @RenderBody()
+            </div>
+            <!-- /.container-fluid -->
+            <!-- Sticky Footer -->
+            <footer class="sticky-footer">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright © Your Website 2018</span>
+                    </div>
+                </div>
+            </footer>
+        </div>
+        <!-- /.content-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Çıkış Yap</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Mevcut oturumu sonlandırmak için "Çıkış"ı tıklatın.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">İptal</button>
+                    <a class="btn btn-primary" href="/lawyers/Logout">Çıkış Yap</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap core JavaScript-->
+    @Scripts.Render("~/bundles/bootstrap")
+</body>
+</html>
+

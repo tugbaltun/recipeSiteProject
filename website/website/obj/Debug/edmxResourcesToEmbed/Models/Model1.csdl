@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="websiteModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="categories">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="parrent_id" Type="Int32" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="recipes" Relationship="Self.FK_recipes_categories" FromRole="categories" ToRole="recipes" />
+  </EntityType>
+  <EntityType Name="comments">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_id" Type="Int32" Nullable="false" />
+    <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="confirmation" Type="Boolean" />
+    <Property Name="content" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="meal_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="recipes" Relationship="Self.FK_comments_recipes1" FromRole="comments" ToRole="recipes" />
+    <NavigationProperty Name="users" Relationship="Self.FK_comments_users" FromRole="comments" ToRole="users" />
+  </EntityType>
+  <EntityType Name="recipes">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="material" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="praparation" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="image" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="date" Type="DateTime" Precision="3" />
+    <Property Name="categori_id" Type="Int32" Nullable="false" />
+    <Property Name="user_id" Type="Int32" Nullable="false" />
+    <Property Name="Vote" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="categories" Relationship="Self.FK_recipes_categories" FromRole="recipes" ToRole="categories" />
+    <NavigationProperty Name="comments" Relationship="Self.FK_comments_recipes1" FromRole="recipes" ToRole="comments" />
+    <NavigationProperty Name="users" Relationship="Self.FK_recipes_users" FromRole="recipes" ToRole="users" />
+  </EntityType>
+  <EntityType Name="users">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name_sname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="gender" Type="Boolean" />
+    <Property Name="image" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="comments" Relationship="Self.FK_comments_users" FromRole="users" ToRole="comments" />
+    <NavigationProperty Name="recipes" Relationship="Self.FK_recipes_users" FromRole="users" ToRole="recipes" />
+  </EntityType>
+  <EntityType Name="VoteLog">
+    <Key>
+      <PropertyRef Name="AutoId" />
+    </Key>
+    <Property Name="AutoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SectionId" Type="Int16" />
+    <Property Name="VoteForId" Type="Int32" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Vote" Type="Int16" />
+    <Property Name="Active" Type="Boolean" />
+  </EntityType>
+  <Association Name="FK_recipes_categories">
+    <End Role="categories" Type="Self.categories" Multiplicity="1" />
+    <End Role="recipes" Type="Self.recipes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="categories">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="recipes">
+        <PropertyRef Name="categori_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_comments_recipes1">
+    <End Role="recipes" Type="Self.recipes" Multiplicity="1" />
+    <End Role="comments" Type="Self.comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="recipes">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="comments">
+        <PropertyRef Name="meal_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_comments_users">
+    <End Role="users" Type="Self.users" Multiplicity="1" />
+    <End Role="comments" Type="Self.comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="comments">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_recipes_users">
+    <End Role="users" Type="Self.users" Multiplicity="1" />
+    <End Role="recipes" Type="Self.recipes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="recipes">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="websiteEntities6" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="categories" EntityType="Self.categories" />
+    <EntitySet Name="comments" EntityType="Self.comments" />
+    <EntitySet Name="recipes" EntityType="Self.recipes" />
+    <EntitySet Name="users" EntityType="Self.users" />
+    <EntitySet Name="VoteLog" EntityType="Self.VoteLog" />
+    <AssociationSet Name="FK_recipes_categories" Association="Self.FK_recipes_categories">
+      <End Role="categories" EntitySet="categories" />
+      <End Role="recipes" EntitySet="recipes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_comments_recipes1" Association="Self.FK_comments_recipes1">
+      <End Role="recipes" EntitySet="recipes" />
+      <End Role="comments" EntitySet="comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_comments_users" Association="Self.FK_comments_users">
+      <End Role="users" EntitySet="users" />
+      <End Role="comments" EntitySet="comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_recipes_users" Association="Self.FK_recipes_users">
+      <End Role="users" EntitySet="users" />
+      <End Role="recipes" EntitySet="recipes" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

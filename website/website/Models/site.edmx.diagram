@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="679a0227a69049d4bd985c30b4033c83" Name="Diagram1">
+        <EntityTypeShape EntityType="websiteModel.categories" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="websiteModel.comments" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="websiteModel.points" Width="1.5" PointX="8.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="websiteModel.recipes" Width="1.5" PointX="6" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="websiteModel.users" Width="1.5" PointX="0.75" PointY="3.25" IsExpanded="true" />
+        <AssociationConnector Association="websiteModel.FK_recipes_categories" ManuallyRouted="false" />
+        <AssociationConnector Association="websiteModel.FK_comments_recipes1" ManuallyRouted="false" />
+        <AssociationConnector Association="websiteModel.FK_comments_users" ManuallyRouted="false" />
+        <AssociationConnector Association="websiteModel.FK_points_recipes" ManuallyRouted="false" />
+        <AssociationConnector Association="websiteModel.FK_recipes_users" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,152 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.form-control-borderless {
+    border: none;
+}
+
+    .form-control-borderless:hover, .form-control-borderless:active, .form-control-borderless:focus {
+        border: none;
+        outline: none;
+        box-shadow: none;
+    }
+
+.nav {
+    width:5%
+}
+
+.anamenu, .altmenu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+    .anamenu a {
+        display: block;
+        background-color: #89121b;
+        text-decoration: none;
+        padding: 10px;
+        color: #000;
+        width: 100%;
+    }
+
+        .anamenu a:hover {
+            background-color: #fff;
+        }
+
+
+    .anamenu li:hover .altmenu {
+        display: block;
+        max-height: 200px;
+        width:100%;
+    }
+
+    .altmenu a {
+        background-color: #f39c12;
+    }
+
+        .altmenu a:hover {
+            background-color: #7f8c8d;
+        }
+
+.altmenu {
+    overflow: hidden;
+    max-height: 0;
+    -webkit-transition: all 0.5s ease-out;
+}
+
+.kolon {
+    float: left;
+    border: 1px solid red;
+    padding: 10px;
+    margin: 10px;
+}
+
+#employees {
+    padding: 0 20px
+}
+
+    #employees:last-child {
+        border-bottom: 1px solid #BBB;
+    }
+
+    #employees > input {
+        display: none;
+    }
+
+    #employees i {
+        display: inline-block;
+        float: right;
+        padding: 2px;
+        width: 40px;
+        height: 20px;
+        border-radius: 13px;
+        vertical-align: middle;
+        -webkit-transition: .25s .09s;
+        transition: .25s .09s;
+        position: relative;
+        background: #d8d9db;
+        box-sizing: initial;
+    }
+
+        #employees i:after {
+            content: " ";
+            display: block;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #fff;
+            position: absolute;
+            left: 2px;
+            -webkit-transition: .25s;
+            transition: .25s;
+        }
+
+    #employees > input:checked + i {
+        background: #4bd865;
+    }
+
+        #employees > input:checked + i:after {
+            -webkit-transform: translateX(20px);
+            transform: translateX(20px);
+        }
+
+    #employees:hover {
+        cursor: pointer;
+    }
+
+
+#dis_bolme {
+    width: 500px;
+    height: 250px;
+}
+
+
+.ic_bolme {
+    float: left;
+    width: 250px;
+    height: 150px;
+    margin-top:-55px;
+}

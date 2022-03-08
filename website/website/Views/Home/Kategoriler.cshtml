@@ -1,0 +1,66 @@
+﻿@model website.Models.Class1
+
+@{
+    ViewBag.Title = "Kategoriler";
+}
+
+@*<table class="table">
+    <tr>
+        <th>
+            <h2 style="color:brown">
+                @Html.DisplayNameFor(model => model.name)
+            </h2>
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td style="color:black">
+                @Html.ActionLink(item.mainCat., "KategoriYemek", new { id = item.id }, htmlAttributes: new { @class = "nav-item b", @style = "color:black" })
+            </td>
+        </tr>
+    }
+
+</table>*@
+
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+    
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+        @foreach (var item in Model.Tub.Item1)
+        {
+            <tr>
+                <td style="color:black">
+                    @Html.ActionLink(item.name, "KategoriYemek", new { id = item.id }, htmlAttributes: new { @class = "nav-link collapsed", @style = "color:black"})
+                </td>
+            </tr>
+            @*<a class="nav-link collapsed" href="~/Home/KategoriYemek?id=@item.id" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>@item.name</span>
+            </a>*@
+
+            <tr>
+                @foreach (var index in Model.Tub.Item2)
+                {
+                <td style="color:orange">
+                    @Html.ActionLink(index.name, "KategoriYemek", new { id = index.id }, htmlAttributes: new { @class = "nav-link collapsed", @style = "color:orange" })
+                </td>
+                }
+            </tr>
+                
+                @*<a class="collapse-item" href="~/Home/KategoriYemek?id=@item.id">@index.name</a>*@
+            
+            @*<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+
+
+                </div>
+            </div>*@
+        }
+    </li>
+</ul>
+
+
+

@@ -1,0 +1,101 @@
+﻿@model website.Models.recipes
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using website.Models
+@{recipes recipes = ViewBag.Query;}
+<div class="container col-10" style="margin-bottom:20px;">
+
+    @if (recipes.image != null)
+    {
+        <img src="~/Content/img/@recipes.image" style="width:600px;height:400px;" />
+    }
+
+
+
+    <h3 class="kutu1" style="color:darkred">@recipes.name</h3>
+
+    <h4 style="color:black;font-size:large; font-weight:400;">@recipes.name İçin Malzemeler</h4>
+
+    @*<div class="tr" style="background-color:#f1f1f1;">
+        <div class="td">@Html.Partial("_VoteShow", Model.Vote)</div>
+        <div class="td">@Html.Partial("_VoteNow", Model)</div>
+    </div>*@
+
+    <p>@Html.Raw(recipes.material)</p>
+    <h4 style="color:black;font-size:large; font-weight:400;">@recipes.name Hazırlanışı</h4>
+    <h6>@Html.Raw(recipes.preparation) </h6>
+    <h4>Tarif Sahibi: @ViewBag.name</h4>
+
+    @* Yorumlar*@
+    <div style="height:300px; background-color:white; margin:20px 0 0 0; padding:5px; border-color:#4e73df;border-style: solid; border-width: 5px;">
+        <div style="width:160px;height:30px;border-radius:5px;background-color:#4e73df;">
+            <h5>Yorum Gönder</h5>
+        </div>
+        <br />
+
+
+        @using (Html.BeginForm("Details", "recipes", FormMethod.Post))
+        {
+            if (Session["user"] == null)
+            {
+                <p>Yemek tariflerine yorum yapabilmek için <a href="/Home/Login" style="color:darkred;">üye girişi</a> yapmalısınız. </p>
+            }
+
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                <textarea id="yorum" name="yorum" class="form-control" rows="3"></textarea>
+            </div>
+            if (Session["user"] == null)
+            {
+                <a href="~/Home/Login"><input type="button" value="Giriş Yap" class="btn btn-primary" /></a>
+                <a href="~/Home/Register"><input type="button" value="Üye Ol" class="btn btn-primary" /></a>
+            }
+            else
+            {
+                <a href="~/recipes/Details?id=@recipes.id"> <input id="gonder" name="id" type="submit" value="Gönder" class="btn btn-primary" /></a>
+            }
+            @Html.Raw(TempData["alert"]);
+        }
+
+    </div>
+
+    <table class="table-primary col-12" style="border-color:#4e73df;border-style: solid; border-width: 5px;">
+        <td>
+            @if (recipes.comments.ToList().Count == 0)
+            {
+                <h5 style="color:darkred">Bu tarife henüz yorum yapılmamış. İlk yorum yapan siz olun!</h5>
+            }
+            else
+            {
+                <br>
+                <h4 style="color:darkred;text-align:center;">Yorumlar</h4>
+                <br />
+                foreach (var item in recipes.comments.ToList())
+                {
+                <div style="border:solid 1px;">
+                    <div style="border:solid 1px;">
+                        <a class="pull-left" href="#" style="position:relative;">
+                            <h5>
+                                @item.users.name_sname
+                                <img class="img-profile rounded-circle" style="width:50px;" src="~/Content/img/users/@item.users.image" alt="@item.users.name_sname" />
+                                <small>@ViewBag.year yıl @ViewBag.month ay @ViewBag.day gün önce</small>
+                            </h5>
+                        </a>
+                    </div>
+                    
+                    <br />
+                    <p>@item.content</p>
+                </div>
+                <br />
+                }
+            }
+        </td>
+        <br />
+        </table>
+</div>
+
+<script src="~/Scripts/js/jquery.min.js">
+
+</script>

@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="websiteModel1StoreContainer" CdmEntityContainer="websiteEntitie">
+    <EntitySetMapping Name="categories">
+      <EntityTypeMapping TypeName="websiteModel1.categories">
+        <MappingFragment StoreEntitySet="categories">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="parrent_id" ColumnName="parrent_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="comments">
+      <EntityTypeMapping TypeName="websiteModel1.comments">
+        <MappingFragment StoreEntitySet="comments">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="confirmation" ColumnName="confirmation" />
+          <ScalarProperty Name="content" ColumnName="content" />
+          <ScalarProperty Name="meal_id" ColumnName="meal_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="points">
+      <EntityTypeMapping TypeName="websiteModel1.points">
+        <MappingFragment StoreEntitySet="points">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="point" ColumnName="point" />
+          <ScalarProperty Name="ipAdd" ColumnName="ipAdd" />
+          <ScalarProperty Name="mealid" ColumnName="mealid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="recipes">
+      <EntityTypeMapping TypeName="websiteModel1.recipes">
+        <MappingFragment StoreEntitySet="recipes">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="material" ColumnName="material" />
+          <ScalarProperty Name="praparation" ColumnName="praparation" />
+          <ScalarProperty Name="image" ColumnName="image" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="categori_id" ColumnName="categori_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="users">
+      <EntityTypeMapping TypeName="websiteModel1.users">
+        <MappingFragment StoreEntitySet="users">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name_sname" ColumnName="name_sname" />
+          <ScalarProperty Name="mail" ColumnName="mail" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="image" ColumnName="image" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

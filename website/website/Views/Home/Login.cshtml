@@ -1,0 +1,49 @@
+﻿@model website.Models.users
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h5>@ViewBag.LoginError</h5>
+<div class="container">
+    <div class="card card-login mx-auto mt-6 col-5" style="margin-top:100px;">
+        <div class="card-header" style="text-align:center;"><h5>Giriş Yap</h5></div>
+        <div class="card-body " >
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.mail, htmlAttributes: new { @for = "Mail" })
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.mail, new { htmlAttributes = new { @class = "form-control", @placeholder = "E-Posta", @type = "mail" } })
+                            @Html.ValidationMessageFor(model => model.mail, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.password, htmlAttributes: new { @for = "Psw" })
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control", @placeholder = "Şifre", type = "password" } })
+                            @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="form-label-group">
+                            <input type="submit" value="Giriş Yap" class="btn btn-primary btn-block" />
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <a class="d-block small mt-3" href="/customers/Register" value="Kayıt Ol"></a>
+                        <a class="d-block small" href="/customers/forgot-password">Şifrenizi mi unuttunuz?</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

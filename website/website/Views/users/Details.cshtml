@@ -1,0 +1,48 @@
+﻿@model website.Models.users
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<a href="~/users/Details?id=@Model.id">Git</a>
+<div>
+    <img class="img-fluid img-thumbnail" width="150px;" src="~/Content/img/users/@Model.image" />
+    <h4>@Html.DisplayFor(model => model.name_sname)</h4>
+    <table>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.name_sname):
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.name_sname)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.mail):
+            </th>
+            <td>
+                @Html.DisplayFor(modelItem => modelItem.mail)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.gender):
+            </th>
+            @if (Model.gender == true)
+            {
+                <td>
+                    Kadın
+                </td>
+            }
+            else
+            {
+                <td>
+                    Erkek
+                </td>
+            }
+        </tr>
+
+
+    </table>
+</div>
